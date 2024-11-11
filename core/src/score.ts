@@ -8,9 +8,11 @@ type GameState = Games<Frames<Bowls<PinNumber|undefined>>>;
 
 export class ScoreCalculator {
     private gameState: GameState
+    private currentBowlIndex: number
 
     constructor() {
         this.gameState = this.initializeGameState()
+        this.currentBowlIndex = -1;
     }
 
     private initializeGameState(): GameState {
@@ -23,12 +25,17 @@ export class ScoreCalculator {
 
     submitLastThrowResult(knockedDownPins: number): void {
         if (knockedDownPins < 0 || knockedDownPins > 10) {
-            throw new Error("Pin number must be between 0 and 10")
+            throw new Error("Pin number must be between 0 and 10");
         }
-        this.gameState[0][0][0] = knockedDownPins
+        this.currentBowlIndex = this.currentBowlIndex + 1;
+        this.gameState[0][0][this.currentBowlIndex] = knockedDownPins;
+    }
+
+    private getKnockedDownPinAt(gameIndex: number, frameIndex: number, bowlIndex: number): number {
+        return this.gameState[0][0][bowlIndex] || 0;
     }
 
     getCurrentScore(): number {
-        return this.gameState[0][0][0] || 0;
+        return this.getKnockedDownPinAt(0, 0, this.currentBowlIndex - 1) + this.getKnockedDownPinAt(0, 0, this.currentBowlIndex);
     }
 }

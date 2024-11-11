@@ -12,4 +12,16 @@ describe("score", () => {
         // Then
         expect(actualScore).toBe(1);
     })
+
+    test("if two pins are knocked down, score is 2", () => {
+        // Given
+        const scoreCalculator = new ScoreCalculator();
+        scoreCalculator.submitLastThrowResult(2);
+
+        // When
+        const actualScore = scoreCalculator.getCurrentScore();
+
+        // Then
+        expect(actualScore).toBe(2);
+    })
 })

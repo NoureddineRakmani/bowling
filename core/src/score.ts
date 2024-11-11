@@ -1,7 +1,31 @@
+type Games<G> = Tuple<G, 3>;
+type Frames<F> = Tuple<F, 10>;
+type Bowls<B> = Tuple<B, 2>;
+type PinNumber = number;
+
+type GameState = Games<Frames<Bowls<PinNumber|undefined>>>;
+
+
 export class ScoreCalculator {
-    submitLastThrowResult(knockedDownPins: number): void {}
+    private gameState: GameState
+
+    constructor() {
+        this.gameState = this.initializeGameState()
+    }
+
+    private initializeGameState(): GameState {
+        const makeFrame = () => [...Array(2)].map(() => undefined)
+        const makeGame = () => [...Array(10)].map(() => makeFrame())
+        const makeAllGames = () => [...Array(3)].map(() => makeGame())
+
+        return makeAllGames() as GameState;
+    }
+
+    submitLastThrowResult(knockedDownPins: number): void {
+        this.gameState[0][0][0] = knockedDownPins
+    }
 
     getCurrentScore(): number {
-        return 1;
+        return this.gameState[0][0][0] || 0;
     }
 }

@@ -66,4 +66,18 @@ describe("score", () => {
         // Then
         expect(actualScore).toBe(3);
     })
+
+    test("if the pin sequence is [[2,1],[3]] the score is 3", () => {
+        // Given
+        const scoreCalculator = new ScoreCalculator();
+        scoreCalculator.submitLastThrowResult(2);
+        scoreCalculator.submitLastThrowResult(1);
+        scoreCalculator.submitLastThrowResult(3);
+
+        // When
+        const actualScore = scoreCalculator.getCurrentScore();
+
+        // Then
+        expect(actualScore).toBe(5);
+    })
 })

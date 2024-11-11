@@ -3,6 +3,7 @@
   "packageManager": "yarn@4.5.1",
   "devDependencies": {
     "jest": "^29.7.0",
+    "prettier": "3.3.3",
     "ts-jest": "^29.2.5"
   }
 }

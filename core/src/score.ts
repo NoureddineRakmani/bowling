@@ -22,6 +22,9 @@ export class ScoreCalculator {
     }
 
     submitLastThrowResult(knockedDownPins: number): void {
+        if (knockedDownPins < 0 || knockedDownPins > 10) {
+            throw new Error("Pin number must be between 0 and 10")
+        }
         this.gameState[0][0][0] = knockedDownPins
     }
 

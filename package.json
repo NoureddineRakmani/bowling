@@ -1,0 +1,13 @@
+{
+  "name": "bowling",
+  "packageManager": "yarn@4.5.1",
+  "workspaces": [
+    "core"
+  ],
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.9.0",
+    "typescript": "^5.6.3"
+  }
+}
